@@ -1,0 +1,643 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>600</width>
+    <height>800</height> <!-- Giảm chiều cao để hiển thị tốt hơn -->
+   </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>400</width>
+    <height>500</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>16777215</width>
+    <height>16777215</height>
+   </size>
+  </property>
+  <property name="windowTitle">
+   <string>Flashcard Học Tập</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">/* ===== GIAO DIỆN ĐEN &amp; XANH DƯƠNG TỐI GIẢN ===== */
+
+/* TOÀN BỘ CỬA SỔ - Chỉ màu đen */
+QMainWindow {
+    background-color: #000000;
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    color: #ffffff;
+}
+
+/* Container chính - Linh hoạt */
+QWidget#centralwidget {
+    background-color: #000000;
+    padding: 5px;
+}
+
+/* ===== HEADER - Đếm thẻ ===== */
+QLabel#labelCounter {
+    font-size: 14px;
+    font-weight: 500;
+    color: #60a5fa; /* Xanh dương sáng */
+    background-color: rgba(30, 41, 59, 0.8); /* Xanh than đậm */
+    border: 1px solid #1e40af; /* Viền xanh đậm */
+    padding: 8px 16px;
+    border-radius: 8px;
+    text-align: center;
+}
+
+/* ===== FLASHCARD CHÍNH ===== */
+QLabel#labelFlashcard {
+    background-color: #0f172a; /* Xanh đen đậm */
+    color: #e2e8f0; /* Trắng xám */
+    border: 2px solid #1e3a8a; /* Viền navy */
+    border-radius: 12px;
+    padding: 30px 20px;
+    font-size: 20px;
+    font-weight: 500;
+    text-align: center;
+    /* Cho phép text wrap và co dãn */
+    word-wrap: break-word;
+}
+
+QLabel#labelFlashcard:hover {
+    border-color: #3b82f6; /* Xanh điện khi hover */
+    background-color: #1e293b;
+}
+
+/* ===== NÚT ĐIỀU KHIỂN - Chỉ 3 nút chính ===== */
+QPushButton {
+    background-color: #1e3a8a; /* Navy */
+    color: white;
+    border: 1px solid #3b82f6;
+    border-radius: 8px;
+    padding: 10px 15px;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+QPushButton:hover {
+    background-color: #2563eb; /* Xanh sáng hơn */
+    border-color: #60a5fa;
+}
+
+QPushButton:pressed {
+    background-color: #1e40af; /* Xanh đậm hơn */
+}
+
+/* Nút Lật thẻ - nổi bật hơn */
+QPushButton#btnFlip {
+    background-color: #3b82f6; /* Xanh điện */
+    font-weight: 600;
+    font-size: 15px;
+    border: 1px solid #60a5fa;
+}
+
+QPushButton#btnFlip:hover {
+    background-color: #2563eb;
+}
+
+/* ===== NÚT XÓA ===== */
+QPushButton#btnDelete {
+    background-color: #1e293b; /* Xanh than đậm */
+    color: #e2e8f0;
+    border: 1px solid #475569;
+    border-radius: 8px;
+    padding: 8px 15px;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+QPushButton#btnDelete:hover {
+    background-color: #334155; /* Xanh than sáng hơn */
+    border-color: #64748b;
+}
+
+/* ===== NHÓM THÊM THẺ MỚI ===== */
+QGroupBox {
+    background-color: rgba(15, 23, 42, 0.9); /* Xanh đen trong suốt */
+    border: 1px solid #334155; /* Xám xanh */
+    border-radius: 10px;
+    color: #cbd5e1;
+    font-size: 14px;
+}
+
+QGroupBox::title {
+    color: #60a5fa; /* Xanh sáng */
+    subcontrol-origin: margin;
+    left: 15px;
+    padding: 0 10px;
+    font-weight: 600;
+}
+
+/* ===== Ô NHẬP LIỆU ===== */
+QLineEdit, QTextEdit {
+    background-color: #1e293b; /* Xanh than */
+    color: #f1f5f9; /* Trắng nhẹ */
+    border: 1px solid #475569; /* Xám xanh */
+    border-radius: 6px;
+    padding: 8px;
+    font-size: 14px;
+    selection-background-color: #3b82f6;
+}
+
+QLineEdit:focus, QTextEdit:focus {
+    border: 1px solid #3b82f6;
+    background-color: #0f172a;
+}
+
+QLineEdit::placeholder, QTextEdit::placeholder {
+    color: #94a3b8; /* Xám nhạt */
+    font-style: italic;
+}
+
+/* ===== NÚT THÊM ===== */
+QPushButton#btnAdd {
+    background-color: #1e3a8a; /* Navy (giống nút chính) */
+    border: 1px solid #3b82f6;
+}
+
+QPushButton#btnAdd:hover {
+    background-color: #2563eb;
+}
+
+/* ===== MENU BAR ===== */
+QMenuBar {
+    background-color: #000000;
+    color: #cbd5e1;
+    border-bottom: 1px solid #334155;
+}
+
+QMenuBar::item:selected {
+    background-color: rgba(59, 130, 246, 0.2);
+    color: #60a5fa;
+}
+
+QMenu {
+    background-color: #0f172a;
+    color: #e2e8f0;
+    border: 1px solid #334155;
+}
+
+QMenu::item:selected {
+    background-color: #3b82f6;
+    color: white;
+}
+
+/* ===== SCROLLBAR ===== */
+QScrollBar:vertical {
+    background-color: #1e293b;
+    width: 10px;
+    border-radius: 5px;
+}
+
+QScrollBar::handle:vertical {
+    background-color: #475569;
+    border-radius: 5px;
+    min-height: 20px;
+}
+
+QScrollBar::handle:vertical:hover {
+    background-color: #64748b;
+}
+
+/* ===== LABEL PHỤ ===== */
+QLabel {
+    color: #94a3b8;
+    font-size: 13px;
+}</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <property name="sizePolicy">
+    <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+     <horstretch>0</horstretch>
+     <verstretch>0</verstretch>
+    </sizepolicy>
+   </property>
+   <layout class="QVBoxLayout" name="verticalLayout" stretch="0,1,0,1">
+    <property name="spacing">
+     <number>10</number>
+    </property>
+    <property name="leftMargin">
+     <number>10</number>
+    </property>
+    <property name="topMargin">
+     <number>10</number>
+    </property>
+    <property name="rightMargin">
+     <number>10</number>
+    </property>
+    <property name="bottomMargin">
+     <number>10</number>
+    </property>
+    <item>
+     <widget class="QLabel" name="labelCounter">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>14</pointsize>
+        <weight>62</weight>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="text">
+       <string>跟俊德学习</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QLabel" name="labelFlashcard">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="minimumSize">
+       <size>
+        <width>0</width>
+        <height>200</height>
+       </size>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>18</pointsize>
+        <weight>62</weight>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="text">
+       <string>Câu hỏi sẽ hiển thị ở đây</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+      <property name="wordWrap">
+       <bool>true</bool>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <layout class="QHBoxLayout" name="horizontalLayout">
+      <property name="spacing">
+       <number>10</number>
+      </property>
+      <item>
+       <spacer name="horizontalSpacer_2">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>40</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item>
+       <widget class="QPushButton" name="btnPrev">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+          <horstretch>1</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>12</pointsize>
+          <weight>62</weight>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="text">
+         <string>◀ Trước</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="btnFlip">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+          <horstretch>1</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>13</pointsize>
+          <weight>75</weight>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="text">
+         <string>Lật thẻ</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="btnNext">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+          <horstretch>1</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>12</pointsize>
+          <weight>62</weight>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="text">
+         <string>Sau ▶</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <spacer name="horizontalSpacer_3">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>40</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+     </layout>
+    </item>
+    <item>
+     <widget class="QGroupBox" name="groupBox">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="title">
+       <string>Thêm thẻ mới</string>
+      </property>
+      <layout class="QVBoxLayout" name="verticalLayout_2">
+       <property name="spacing">
+        <number>8</number>
+       </property>
+       <property name="leftMargin">
+        <number>10</number>
+       </property>
+       <property name="topMargin">
+        <number>20</number>
+       </property>
+       <property name="rightMargin">
+        <number>10</number>
+       </property>
+       <property name="bottomMargin">
+        <number>10</number>
+       </property>
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_2">
+         <item>
+          <spacer name="horizontalSpacer">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>40</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item>
+          <widget class="QPushButton" name="btnDelete">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>40</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <pointsize>12</pointsize>
+             <weight>62</weight>
+             <bold>true</bold>
+            </font>
+           </property>
+           <property name="text">
+            <string>Xóa thẻ</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <spacer name="horizontalSpacer_4">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>40</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <widget class="QLabel" name="label">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="font">
+          <font>
+           <pointsize>12</pointsize>
+          </font>
+         </property>
+         <property name="text">
+          <string>Câu hỏi:</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLineEdit" name="txtQuestion">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>35</height>
+          </size>
+         </property>
+         <property name="font">
+          <font>
+           <pointsize>12</pointsize>
+          </font>
+         </property>
+         <property name="placeholderText">
+          <string>Nhập câu hỏi...</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="label_2">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="font">
+          <font>
+           <pointsize>12</pointsize>
+          </font>
+         </property>
+         <property name="text">
+          <string>Câu trả lời:</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QTextEdit" name="txtAnswer">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>100</height>
+          </size>
+         </property>
+         <property name="font">
+          <font>
+           <pointsize>12</pointsize>
+          </font>
+         </property>
+         <property name="placeholderText">
+          <string>Nhập câu trả lời...</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="btnAdd">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>45</height>
+          </size>
+         </property>
+         <property name="font">
+          <font>
+           <pointsize>13</pointsize>
+           <weight>62</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="text">
+          <string>Thêm thẻ</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>600</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuFile">
+    <property name="title">
+     <string>File</string>
+    </property>
+    <addaction name="actionNew"/>
+    <addaction name="actionOpen"/>
+    <addaction name="actionSave"/>
+    <addaction name="separator"/>
+    <addaction name="actionExit"/>
+   </widget>
+   <widget class="QMenu" name="menuHelp">
+    <property name="title">
+     <string>Help</string>
+    </property>
+    <addaction name="actionAbout"/>
+   </widget>
+   <addaction name="menuFile"/>
+   <addaction name="menuHelp"/>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+  <action name="actionNew">
+   <property name="text">
+    <string>New</string>
+   </property>
+  </action>
+  <action name="actionOpen">
+   <property name="text">
+    <string>Open...</string>
+   </property>
+  </action>
+  <action name="actionSave">
+   <property name="text">
+    <string>Save</string>
+   </property>
+  </action>
+  <action name="actionExit">
+   <property name="text">
+    <string>Exit</string>
+   </property>
+  </action>
+  <action name="actionAbout">
+   <property name="text">
+    <string>About</string>
+   </property>
+  </action>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

@@ -1,0 +1,1 @@
+python -m PyInstaller --onefile --windowed --name FlashcardApp --add-data "flashcard.ui;." flashcard2_0.py
